@@ -1,0 +1,116 @@
+body {
+  background-color: #111111;
+}
+nav {
+  position: absolute;
+}
+
+.full-screen {
+  position: absolute;
+  top: 0;
+  object-fit: cover;
+  z-index: 22;
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+}
+.small-img {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.small-screen {
+  position: absolute;
+  top: 200px;
+  min-width: 500px;
+  max-width: 550px;
+  left: 1000px;
+  padding-top: 90px;
+  z-index: -3;
+}
+
+.cover {
+  height: 100vh;
+}
+
+.cover .behind {
+  position: fixed;
+  background-color: #004ebb;
+  width: 90%;
+  bottom: 200px;
+  height: 100vh;
+  z-index: -2;
+}
+.cover img {
+  display: flex;
+  position: absolute;
+}
+
+.cover .background-text {
+  position: fixed;
+  left: 34%;
+  top: 30%;
+  font-size: 12rem;
+  color: #8aff3c;
+  transform: translate(-10%, -50%);
+}
+
+.input-group {
+  position: fixed;
+  font-size: 2em;
+  max-width: 400px;
+  left: 50%;
+  top: 300px;
+  transform: translate(-50%, -50%);
+}
+
+.cover .projector {
+  /* display: flex; */
+  background-size: cover;
+  left: 750px;
+  top: -70px;
+  z-index: -1;
+}
+.cover .top-walls {
+  /* display: flex; */
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  /* bottom: 200px; */
+  top: -190px;
+  z-index: -2;
+}
+
+.cover .left-wall {
+  background-size: cover;
+  max-width: 1900px;
+  max-height: 800px;
+  z-index: 1;
+  bottom: -100px;
+  /* bottom: -500px; */
+}
+
+.cover .right-wall {
+  background-size: cover;
+  right: 0;
+  width: 50vw;
+  bottom: -100px;
+  height: 40vh;
+}
+.cover .way {
+  background-size: cover;
+  width: 50vw;
+  bottom: -100px;
+  height: 50vh;
+  top: 900px;
+  left: 900px;
+  transform: translate(-50%, -50%);
+}
+
+.first-section {
+  height: 100vh;
+  width: 100%;
+  z-index: 2;
+  background-color: #111111;
+}
