@@ -1,36 +1,46 @@
 var searchFormEl = document.querySelector(".btn")
-var row = document.querySelector(".row")
+var searchSection = document.querySelector("#search-section")
+var trendingSection = document.querySelector("#trending-section")
+var trendingBtn = document.querySelector("#trending-btn")
 var firstSection = document.querySelector("#first-section")
-function searchApi(query) {
-    var event_url = "https://api.themoviedb.org/3/search/multi?api_key=d42525da8940f7a7a298e98a209ec951&language=en-US&query=";
+var form = document.querySelector("#form-submit")
+
+
+// =============
+// =======Trending Api
+// ===========
+
+function trendingApi() {
+    var trending_url = "https://api.themoviedb.org/3/trending/all/week?api_key=d42525da8940f7a7a298e98a209ec951";
   
-    var event_url = event_url + query + "&page=1&include_adult=false" ;
   
-  console.log(event_url);
+  console.log(trending_url);
   
-    fetch(event_url)
+    fetch(trending_url)
       .then(function (response) {
         if (!response.ok) {
           throw response.json();
         }
         return response.json();
       })
-  
-      .then(function (locRes) {
+      .then(function (trending) {
         // write locRes to page so user knows what they are viewing
-        row.textContent = locRes.results.length;
-        console.log(locRes.results);
-        if (!locRes.results.length) {
+        trendingSection.textContent = trending.results.length;
+        console.log(trending.results);
+        if (!trending.results.length) {
           console.log('No results found!');
-          row.innerHTML = '<h3>No results found, search again!</h3>';
+          trendingSection.innerHTML = '<h3>No results found, search again!</h3>';
         } else {
-            row.textContent = "";
-          for (var i = 0; i < locRes.results.length; i++) {
-            printResults(locRes.results[i]);
+            trendingSection.textContent = "";
+          for (var i = 0; i < trending.results.length; i++) {
+            printResultsTrending(trending.results[i]);
           }
         }
         
       })
+
+  
+
       .catch(function (error) {
         console.error(error);
       });
@@ -38,7 +48,7 @@ function searchApi(query) {
   
   }
 
-  function printResults(resultObj) {
+  function printResultsTrending(resultObj) {
 
     var resultCard = document.createElement('div')
     resultCard.classList.add("col")
@@ -60,7 +70,8 @@ function searchApi(query) {
         return 
     }
     var cardBody = document.createElement('div')
-    cardBody.classList.add("card-body")
+    cardBody.classList.add("card-img-overlay", "hidden")
+    cardBody.setAttribute("style", "background-color: #1111119f; width: 70%; height: 100%; overflow: hidden;")
     card1.append(cardBody)
 
     var cardh1= document.createElement('h1')
@@ -76,16 +87,130 @@ function searchApi(query) {
     var cardText= document.createElement('p')
     cardText.classList.add("card-text")
     cardText.innerHTML = resultObj.overview
+    cardText.setAttribute("style", "display:flex; flex-wrap: wrap; max-width: 200px; max-height: 100px;")
     cardBody.append(cardText)
     
 
 
-      row.append(resultCard)
+    trendingSection.append(resultCard)
+//     const cards = gsap.utils.toArray(".row")
+//     console.log(cards);
+//     cards.forEach(col => {
+//     gsap.from(col, { 
+//         scrollTrigger:{
+//             trigger: ".first-section",
+//             toggleActions: "restart resume resume restart "
+//             } ,
+//             opacity: 0,  
+//             delay: .5,
+//             ease: Expo.easeInOut,
+//             duration: 1
+//       })
+// });
+
 }
+
+// =============
+// =======Search Api
+// ===========
+
+
+function searchApi(query) {
+    var event_url = "https://api.themoviedb.org/3/search/multi?api_key=d42525da8940f7a7a298e98a209ec951&language=en-US&query=";
+  
+    var event_url = event_url + query + "&page=1&include_adult=false" ;
+  
+  console.log(event_url);
+  
+    fetch(event_url)
+      .then(function (response) {
+        if (!response.ok) {
+          throw response.json();
+        }
+        return response.json();
+      })
+      .then(function (locRes) {
+        // write locRes to page so user knows what they are viewing
+        searchSection.textContent = locRes.results.length;
+        console.log(locRes.results);
+        if (!locRes.results.length) {
+          console.log('No results found!');
+          searchSection.innerHTML = '<h3>No results found, search again!</h3>';
+        } else {
+            searchSection.textContent = "";
+          for (var i = 0; i < locRes.results.length; i++) {
+            printResultsSearch(locRes.results[i]);
+          }
+        }
+        
+      })
+
+  
+
+      .catch(function (error) {
+        console.error(error);
+      });
+  
+  
+  }
+
+  
+
+  function printResultsSearch(resultObj) {
+
+    var resultCard = document.createElement('div')
+    resultCard.classList.add("col")
+
+
+    var card1 = document.createElement('div')
+    card1.classList.add("card", "h-100")
+    resultCard.append(card1)
+
+    var gameThumb = document.createElement('img');
+    gameThumb.classList.add("card-img-top")
+  
+
+  
+    if (resultObj.poster_path) {
+        gameThumb.setAttribute("src", "https://image.tmdb.org/t/p/w500" + resultObj.poster_path);
+        card1.append(gameThumb);
+    }else{
+        return 
+    }
+    var cardBody = document.createElement('div')
+    cardBody.classList.add("card-img-overlay", "hidden")
+    cardBody.setAttribute("style", "background-color: #1111119f; width: 70%; height: 100%; overflow: hidden;")
+    card1.append(cardBody)
+
+    var cardh1= document.createElement('h1')
+    cardh1.classList.add("card-title")
+    cardh1.innerHTML = resultObj.original_title
+    cardBody.append(cardh1)
+
+    var cardh2= document.createElement('h1')
+    cardh2.classList.add("card-title")
+    cardh2.innerHTML = resultObj.release_date
+    cardBody.append(cardh2)
+
+    var cardText= document.createElement('p')
+    cardText.classList.add("card-text")
+    cardText.innerHTML = resultObj.overview
+    cardText.setAttribute("style", "display:flex; flex-wrap: wrap; max-width: 200px; max-height: 100px;")
+    cardBody.append(cardText)
+    
+
+
+      searchSection.append(resultCard)
+}
+
+
 
   function handleSearchFormSubmit(event) {
     event.preventDefault();
-      firstSection.classList.remove('hidden') 
+    firstSection.classList.remove('hidden') ;
+
+
+
     var searchInputVal = document.querySelector('#search-input').value;
     console.log(searchInputVal);
   
@@ -96,11 +221,14 @@ function searchApi(query) {
   
     searchApi(searchInputVal);
     
+    
   }
 
 
 
-
+// =============
+// =======Character Images
+// ===========
 var characterImg = ["./assets/img/quen.png", "./assets/img/joker.png", "./assets/img/john-wick.png","./assets/img/themask.png", "./assets/img/james_bond.png", "./assets/img/iron.png",]
 var randomImage = characterImg[Math.floor(Math.random()*characterImg.length)]
 
@@ -189,5 +317,7 @@ tm.from(".pic-44", 8,{
 
 
 
-searchFormEl.addEventListener("click", handleSearchFormSubmit)
-searchFormEl.addEventListener("submit", handleSearchFormSubmit)
+
+trendingBtn.addEventListener("click", trendingApi)
+searchFormEl.addEventListener("click", handleSearchFormSubmit);
+form .addEventListener("submit", handleSearchFormSubmit);
