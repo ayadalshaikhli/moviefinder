@@ -27,7 +27,7 @@ nav {
   max-width: 550px;
   left: 1000px;
   padding-top: 90px;
-  z-index: -3;
+  z-index: -2;
 }
 
 .cover {
@@ -40,7 +40,7 @@ nav {
   width: 90%;
   bottom: 200px;
   height: 100vh;
-  z-index: -2;
+  z-index: -4;
 }
 .cover img {
   display: flex;
@@ -52,16 +52,18 @@ nav {
   left: 34%;
   top: 30%;
   font-size: 12rem;
-  color: #8aff3c;
+  color: #60a0ffcb;
   transform: translate(-10%, -50%);
 }
 
 .input-group {
-  position: fixed;
+  position: absolute;
+  background-attachment: fixed;
   font-size: 2em;
   max-width: 400px;
   left: 50%;
   top: 300px;
+  z-index: 1;
   transform: translate(-50%, -50%);
 }
 
@@ -79,7 +81,7 @@ nav {
   height: 100vh;
   /* bottom: 200px; */
   top: -190px;
-  z-index: -2;
+  z-index: -1;
 }
 
 .cover .left-wall {
@@ -91,26 +93,20 @@ nav {
   /* bottom: -500px; */
 }
 
-.cover .right-wall {
-  background-size: cover;
-  right: 0;
-  width: 50vw;
-  bottom: -100px;
-  height: 40vh;
-}
-.cover .way {
-  background-size: cover;
-  width: 50vw;
-  bottom: -100px;
-  height: 50vh;
-  top: 900px;
-  left: 900px;
-  transform: translate(-50%, -50%);
-}
-
 .first-section {
+  padding-top: 200px;
   height: 100vh;
   width: 100%;
-  z-index: 2;
   background-color: #111111;
+  z-index: 99;
+}
+
+.row {
+  background-color: #111111;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.hidden {
+  display: none;
 }

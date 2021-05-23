@@ -73,29 +73,27 @@
         <img class="full-screen pic-3" src="./assets/img/animated.png" alt="" />
         <img class="full-screen pic-4" src="./assets/img/comedy.png" alt="" />
       </div>
+      <form id="form-submit" action="">
+        <div class="input-group mb-3">
+          <input
+            id="search-input"
+            type="text"
+            class="form-control"
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+          />
+          <br />
 
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button">
-            Button
-          </button>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">
+              Search
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
       <div class="cover">
         <div class="behind">
-          <div class="small-img">
-            <img
-              class="small-screen pic-44"
-              src="./assets/img/the.png"
-              alt=""
-            />
-          </div>
+          <div class="small-img"></div>
           <div class="background-text">
             <h1>Search.</h1>
           </div>
@@ -104,7 +102,9 @@
         <img src="./assets/img/left-wall.png" class="left-wall" alt="" />
       </div>
     </main>
-    <section class="first-section"></section>
+    <section id="first-section" class="first-section hidden">
+      <div class="row row-cols-1 row-cols-md-6 g-4"></div>
+    </section>
     <!-- ========== -->
     <!-- JavaScript -->
     <!-- ========== -->
